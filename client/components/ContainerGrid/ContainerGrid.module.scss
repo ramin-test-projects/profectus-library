@@ -1,0 +1,29 @@
+@use "../../scss/breakpoints" as *;
+
+.outerContainer {
+  container-type: inline-size;
+  container-name: container-grid-outer;
+}
+
+@mixin grid-css($size, $cols, $min-width, $max-width) {
+  $min-width-clause: if($min-width, "(min-width: #{$min-width})", null);
+  $max-width-clause: if($max-width, "(max-width: #{$max-width})", null);
+  $and: if($min-width and $max-width, " and ", null);
+
+  @container container-grid-outer (#{$min-width-clause}#{$and}#{$max-width-clause}) {
+    .#{$size}_#{$cols} {
+      display: grid;
+      grid-template-columns: repeat($cols, 1fr);
+    }
+  }
+}
+
+$columns-list: 1, 2, 3, 4, 5, 6;
+
+@each $cols in $columns-list {
+  @include grid-css("xs", $cols, null, $xs-max);
+  @include grid-css("sm", $cols, $sm-min, $sm-max);
+  @include grid-css("md", $cols, $md-min, $md-max);
+  @include grid-css("lg", $cols, $lg-min, $lg-max);
+  @include grid-css("xl", $cols, $xl-min, null);
+}

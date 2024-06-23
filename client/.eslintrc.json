@@ -1,0 +1,48 @@
+{
+  "root": true,
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:yaml/recommended",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "yaml", "prefer-arrow"],
+  "ignorePatterns": [".generated/**/*", "**/*.d.ts", "**/*.js", "test/**/*"],
+  "rules": {
+    "no-alert": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "@next/next/no-html-link-for-pages": [
+      "off"
+    ],
+    "no-unused-vars": "off",
+    "no-extra-boolean-cast": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "jsx-quotes": ["error", "prefer-double"],
+    "func-style": ["error", "expression"]
+  },
+  "overrides": [
+    {
+      "files": ["*.*"],
+      "rules": {
+        "@next/next/no-img-element": "off"
+      }
+    },
+    {
+      "files": ["*.stories.*"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    },
+    {
+      "files": ["*.stories.*", "*.storydata.*"],
+      "rules": {
+        "no-alert": "off",
+        "no-console": "off"
+      }
+    }
+  ]
+}
