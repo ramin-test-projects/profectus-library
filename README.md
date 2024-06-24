@@ -2,9 +2,9 @@
 
 ## Project details:
 
-**Database:** MongoDB
-**Back-end:** C# .net 6
-**Front-end:** Nextjs 14
+- **Database:** MongoDB
+- **Back-end:** C# .net 6
+- **Front-end:** Nextjs 14
 
 #### Back-end
 - Uses Mongo.Driver NuGet package to connect to MongoDB.
