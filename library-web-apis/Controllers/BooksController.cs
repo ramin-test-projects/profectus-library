@@ -49,6 +49,9 @@ public class BooksController : ControllerBase
             if (!_helpers.CurrentUser.IsAdmin) return StatusCode(StatusCodes.Status403Forbidden);
 
             string filePath = Path.Combine(_env.ContentRootPath, "books.xlsx");
+            if (!System.IO.File.Exists(filePath)) {
+                return NotFound(new { filePath = filePath });
+            }
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 

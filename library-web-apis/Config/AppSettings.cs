@@ -1,12 +1,20 @@
-﻿public class _JwtSettings
+﻿public class _SettingsUtil {
+    public static string GetValue(IConfiguration config, string key)
+    {
+        string? value = config.GetValue<string>(key);
+        return (string.IsNullOrEmpty(value) ? config[key] : value) ?? "";
+    }
+}
+
+public class _JwtSettings
 {
     public string Secret { get; set; }
     public string Issuer { get; set; }
 
     public _JwtSettings(IConfiguration config)
     {
-        Secret = config["JWT:Secret"] ?? "";
-        Issuer = config["JWT:Issuer"] ?? "";
+        Secret = _SettingsUtil.GetValue(config, "JWT:Secret");
+        Issuer = _SettingsUtil.GetValue(config, "JWT:Issuer");
     }
 }
 
@@ -16,8 +24,8 @@ public class _MongoDB {
 
     public _MongoDB(IConfiguration config)
     {
-        ConnectionString = config["MongoDB:ConnectionString"] ?? "";
-        DatabaseName = config["MongoDB:DatabaseName"] ?? "";
+        ConnectionString = _SettingsUtil.GetValue(config, "MongoDB:ConnectionString");
+        DatabaseName = _SettingsUtil.GetValue(config, "MongoDB:DatabaseName");
     }
 }
 

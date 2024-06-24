@@ -6,9 +6,10 @@ export async function middleware(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
 
   const isApiCall = /^\/api\//gi.test(pathName);
+  const proxyDomain = process.env.NEXTJS_PUBLIC_PROXY_DOMAIN;
 
-  if (isApiCall) {
-    const hostname = process.env.NEXTJS_PUBLIC_PROXY_DOMAIN || request.nextUrl.hostname;
+  if (isApiCall && !!proxyDomain) {
+    const hostname = proxyDomain || request.nextUrl.hostname;
 
     requestHeaders.set("host", process.env.NEXTJS_PUBLIC_PROXY_AS_DOMAIN || hostname);
 

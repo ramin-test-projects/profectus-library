@@ -4,9 +4,6 @@ services:
   # MongoDB (Community Edition)
   mongo:
     image: mongo:latest
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=123
     volumes:
       - ./mongo-data:/data/db
 
@@ -15,7 +12,7 @@ services:
     build:
       dockerfile: library-web-apis\Dockerfile
     environment:
-      - "MongoDB:ConnectionString=mongodb://root:123@mongo:27017"
+      - "MongoDB:ConnectionString=mongodb://mongo:27017"
       - "MongoDB:DatabaseName=library"
       - "ASPNETCORE_ENVIRONMENT=Development"
     depends_on:

@@ -25,7 +25,9 @@ public class BooksCollection
 
     public async Task<bool> UpdateBookAsync(Book book)
     {
-        var result = await _books.UpdateOneAsync(b => b.ID == (book.ID ?? ""), new ObjectUpdateDefinition<Book>(book));
+        if (string.IsNullOrEmpty(book.ID ?? "")) return false;
+
+        var result = await _books.ReplaceOneAsync<Book>(b => b.ID == book.ID, book);
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
